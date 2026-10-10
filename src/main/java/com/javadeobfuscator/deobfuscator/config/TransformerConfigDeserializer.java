@@ -27,7 +27,6 @@ import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -46,9 +45,7 @@ public class TransformerConfigDeserializer extends JsonDeserializer<TransformerC
         if (node.isObject()) {
             List<TransformerConfig> configs = new ArrayList<>();
 
-            for (Iterator<Map.Entry<String, JsonNode>> it = node.fields(); it.hasNext(); ) {
-                Map.Entry<String, JsonNode> field = it.next();
-
+            for (Map.Entry<String, JsonNode> field : node.properties()) {
                 TransformerConfig config = getById(p, ctxt, field.getKey());
 
                 // todo is there a better way to do this other than making a new ObjectMapper?
